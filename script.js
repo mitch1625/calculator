@@ -33,12 +33,17 @@ clearBtn.addEventListener('click', button => {
   num1 = null;
   num2 = null;
   operator = null;
+  total = null;
   displayValue.textContent =''
   storedValue.textContent = ''
 })
 
 
 deleteBtn.addEventListener('click', button => {
+    if (Number.isInteger(total) === true) {
+    return
+  }
+  
   let delValue = displayValue.textContent.slice(0, displayValue.textContent.length - 1)
   if (num2 === null && operator === null){
     displayValue.textContent = delValue
@@ -55,15 +60,22 @@ deleteBtn.addEventListener('click', button => {
 function storeValue(number){
   //Store first value
   if (operator === null && num2 === null){
+    if (displayValue.textContent.length === 11){
+      return
+    }
   displayValue.textContent += number;
   num1 = Number(displayValue.textContent);
   }
   //Store second value
   if (num1 !== null && operator !== null){
-    // storedValue.textContent = num1 + operator
+    if (displayValue.textContent.length === 11){
+      return
+    }
     displayValue.textContent += number
     num2 = Number(displayValue.textContent)
   }
+
+    
 //   console.log(num1)
 //   console.log(num2)
 }
